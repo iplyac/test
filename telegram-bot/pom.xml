@@ -13,7 +13,7 @@
 
     <artifactId>telegram-bot</artifactId>
     <name>Telegram Bot</name>
-    <description>Telegram Bot Integration Service</description>
+    <description>Telegram Bot Interface for OpenAI Chatbot</description>
 
     <dependencies>
         <!-- Spring Boot Web -->
@@ -28,7 +28,7 @@
             <artifactId>telegrambots-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- WebClient for REST calls -->
+        <!-- Spring WebFlux for WebClient -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
