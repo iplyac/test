@@ -2,15 +2,17 @@ package com.telegram.service;
 
 import com.telegram.model.ChatRequest;
 import com.telegram.model.ChatResponse;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-@Slf4j
 public class ChatbotClient {
+
+    private static final Logger log = LoggerFactory.getLogger(ChatbotClient.class);
 
     private final WebClient webClient;
 
@@ -23,7 +25,7 @@ public class ChatbotClient {
     public ChatResponse sendMessage(String userId, String message) {
         try {
             ChatRequest request = new ChatRequest(userId, message);
-            
+
             return webClient.post()
                     .uri("/api/chat")
                     .bodyValue(request)

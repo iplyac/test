@@ -1,6 +1,7 @@
 package com.chatbot.service;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,9 @@ import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
-@Slf4j
 public class PersonaLoaderService {
+
+    private static final Logger log = LoggerFactory.getLogger(PersonaLoaderService.class);
 
     @Value("${chatbot.persona.file-path:./persona.txt}")
     private String personaFilePath;
