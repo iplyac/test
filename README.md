@@ -185,21 +185,6 @@ A simple web interface is included for testing and debugging:
 2. Open `web-ui/index.html` in your browser
 3. Enter a user ID and start chatting
 
-Features:
-- Real-time chat interface
-- Thread management
-- Status indicators
-- Custom user ID support
-
-See [web-ui/README.md](web-ui/README.md) for details.
-
-## 🛠️ Development
-
-### Build Locally
-
-```bash
-# Build all modules
-mvn clean package
 
 # Build specific module
 mvn clean package -pl chatbot-service
