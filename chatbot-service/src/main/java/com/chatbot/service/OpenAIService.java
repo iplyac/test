@@ -12,20 +12,19 @@ import com.theokanning.openai.runs.RunCreateRequest;
 import com.theokanning.openai.threads.Thread;
 import com.theokanning.openai.threads.ThreadRequest;
 import com.theokanning.openai.service.OpenAiService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
-@RequiredArgsConstructor
 public class OpenAIService {
+
+    private static final Logger log = LoggerFactory.getLogger(OpenAIService.class);
 
     private final OpenAiService openAiService;
     private final PersonaLoaderService personaLoaderService;
@@ -38,6 +37,11 @@ public class OpenAIService {
 
     private String assistantId;
     private final Map<String, String> userThreads = new ConcurrentHashMap<>();
+
+    public OpenAIService(OpenAiService openAiService, PersonaLoaderService personaLoaderService) {
+        this.openAiService = openAiService;
+        this.personaLoaderService = personaLoaderService;
+    }
 
     @PostConstruct
     public void init() {

@@ -3,7 +3,7 @@ package com.chatbot.controller;
 import com.chatbot.model.ChatRequest;
 import com.chatbot.model.ChatResponse;
 import com.chatbot.service.OpenAIService;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +11,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 public class ChatController {
 
     private final OpenAIService openAIService;
+
+    public ChatController(OpenAIService openAIService) {
+        this.openAIService = openAIService;
+    }
 
     @PostMapping("/chat")
     public ResponseEntity<ChatResponse> chat(@RequestBody ChatRequest request) {

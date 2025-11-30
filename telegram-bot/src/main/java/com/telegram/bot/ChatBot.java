@@ -2,7 +2,8 @@ package com.telegram.bot;
 
 import com.telegram.model.ChatResponse;
 import com.telegram.service.ChatbotClient;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -11,8 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
-@Slf4j
 public class ChatBot extends TelegramLongPollingBot {
+
+    private static final Logger log = LoggerFactory.getLogger(ChatBot.class);
 
     private final ChatbotClient chatbotClient;
 
