@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  chatbot-service:
+    build:
+      context: .
+      dockerfile: chatbot-service/Dockerfile
+    container_name: chatbot-service
+    ports:
+      - "8080:8080"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PERSONA_FILE_PATH=/app/data/persona.txt
+    volumes:
+      - ./persona.txt:/app/data/persona.txt:ro
+    networks:
+      - chatbot-network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: telegram-bot/Dockerfile
+    container_name: telegram-bot
+    ports:
+      - "8081:8081"
+    environment:
+      - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - CHATBOT_SERVICE_URL=http://chatbot-service:8080
+    depends_on:
+      chatbot-service:
+        condition: service_healthy
+    networks:
+      - chatbot-network
+    restart: unless-stopped
+
+networks:
+  chatbot-network:
+    driver: bridge

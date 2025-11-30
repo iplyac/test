@@ -1,0 +1,28 @@
+# Java / Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+
+# Environment variables
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
